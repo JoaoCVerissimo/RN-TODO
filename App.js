@@ -17,16 +17,17 @@ const Stack = createNativeStackNavigator();
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Auth" screenOptions={{
-        headerStyle: {
-          backgroundColor: '#ccc',
-        },
-        headerTintColor: '#333',
-        headerTitleStyle: {
-          fontWeight: 'bold',
-        },
-      }}>
-        <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'HomePage' }} />
+      <Stack.Navigator initialRouteName="Auth"
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: '#ccc',
+          },
+          headerTintColor: '#333',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}>
+        <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Auth" component={LogInPage} options={{ title: 'Log In Page' }} />
       </Stack.Navigator>
     </NavigationContainer>
