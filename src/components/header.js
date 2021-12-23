@@ -16,16 +16,16 @@ const Header = () => {
       {
         week.map((weekDay, index) => {
           return (
-            <View style={[styles.topContainer, styles.centerText]}>
+            <View key={index} style={[styles.topContainer, styles.centerText]}>
               {(monthDay + index) > 31 ?
-                <Text style={styles.title}>{monthDay + index - 31}</Text>
+                <Text key={index + 100} style={styles.title}>{monthDay + index - 31}</Text>
                 :
-                <Text style={styles.title}>{monthDay + index}</Text>}
+                <Text key={index + 1000} style={styles.title}>{monthDay + index}</Text>}
 
               {(currentDate.getDay() + index > 6) ?
-                <Text style={styles.title}>{week[currentDate.getDay() + index - 7]}</Text>
+                <Text key={index + 10000} style={styles.title}>{week[currentDate.getDay() + index - 7]}</Text>
                 :
-                <Text style={styles.title}>{week[currentDate.getDay() + index]}</Text>
+                <Text key={index + 5000} style={styles.title}>{week[currentDate.getDay() + index]}</Text>
               }
             </View>
           )

@@ -28,7 +28,7 @@ const Footer = ({ onClick, text }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#cbcbcb",
+    backgroundColor: "#ddd",
     opacity: 1,
   },
   whiteText: {

@@ -21,11 +21,12 @@ const App = () => {
       <Stack.Navigator initialRouteName="Auth"
         screenOptions={{
           headerStyle: {
-            backgroundColor: '#cbcbcb',
+            backgroundColor: '#ddd',
           },
           headerTintColor: '#222',
           headerTitleStyle: {
             fontWeight: 'bold',
+            fontSize: 20,
           },
         }}>
         <Stack.Screen name="Home" component={HomeScreen} />

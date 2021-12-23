@@ -1,12 +1,11 @@
 import React, { useLayoutEffect } from 'react';
-import {
-  Text,
-  View,
-} from 'react-native';
+import { View } from 'react-native';
 import Footer from "../../components/footer";
 import FlatListRedux from '../../components/flatlist';
-import styles from "./home.style";
 import Header from '../../components/header';
+import CompletedItems from '../../components/completedItems';
+
+import styles from "./home.style";
 
 const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
@@ -23,9 +22,10 @@ function HomeScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.rowContainer}>
+      <View style={styles.topRowContainer}>
         <Header />
       </View>
+      <CompletedItems />
       <View style={[styles.middleContainer]}>
         <FlatListRedux />
       </View>

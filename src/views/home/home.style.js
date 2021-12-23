@@ -8,10 +8,14 @@ const styles = StyleSheet.create({
     flex: 2,
     backgroundColor: "#eee",
   },
-  rowContainer: {
+  topRowContainer: {
     flex: 2,
     flexDirection: "row",
     marginHorizontal: 10,
+  },
+  rowContainer: {
+    flex: 1,
+    flexDirection: "row",
   },
   middleContainer: {
     flex: 8,
@@ -31,10 +35,10 @@ const styles = StyleSheet.create({
   item: {
     backgroundColor: '#fff',
     padding: 10,
-    marginVertical: 8,
+    marginVertical: 4,
     marginHorizontal: 16,
-    borderRadius: 20,
+    borderRadius: 15,
   },
-});
+})
 
 export default styles;
