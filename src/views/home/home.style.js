@@ -8,6 +8,11 @@ const styles = StyleSheet.create({
     flex: 2,
     backgroundColor: "#eee",
   },
+  rowContainer: {
+    flex: 2,
+    flexDirection: "row",
+    marginHorizontal: 10,
+  },
   middleContainer: {
     flex: 8,
     backgroundColor: "#eee",
