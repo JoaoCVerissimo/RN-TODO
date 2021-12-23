@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect } from 'react';
+import React, { useLayoutEffect } from 'react';
 import {
   Button,
   Text,
@@ -7,8 +7,10 @@ import {
   FlatList,
   Pressable,
 } from 'react-native';
-// something@algumacoisa.com
-// algumacoisa123!
+import Footer from "../../components/footer";
+import { useDispatch, useSelector } from 'react-redux';
+import { addTodo } from '../redux/todoSlice';
+
 function HomeScreen({ navigation }) {
   const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   const week = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -17,14 +19,9 @@ function HomeScreen({ navigation }) {
   let weekName = week[currentDate.getDay()];
   let monthName = month[currentDate.getMonth()];
 
-  const DATA = [
-    {
-      id: '3ac68afc-c6035-48d3-a4f8-fbd9123aa97f63',
-      title: 'Second Item',
-      description: "something here",
-      completed: false,
-    },
-  ];
+  const dispatch = useDispatch();
+
+  const DATA = useSelector(state => state.todos); // Para ir buscar os dados à store com o nome "todos"
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -42,24 +39,26 @@ function HomeScreen({ navigation }) {
   );
 
   const renderItem = ({ item }) => (
-    <Pressable onPress={() => !completed}>
-      <Item title={item.title} description={item.description} />
+    // Aqui vou mudar o estado do completed com um dispatch <Pressable onPress={() => !item.completed}>
+    <Pressable>
+      <Item title={item.title} description={item.description} completed={item.completed} />
     </Pressable>
   );
 
   return (
     <View style={styles.container}>
-      <View style={[styles.mainContainer, styles.centerText]}>
-        <Text style={styles.smallText}>{monthDay}</Text>
-        <Text style={styles.smallText}>{weekName}</Text>
+      <View style={[styles.topContainer, styles.centerText]}>
+        <Text style={styles.title}>{monthDay}</Text>
+        <Text style={styles.title}>{weekName}</Text>
       </View>
-      <View style={styles.bottonContainer}>
+      <View style={[styles.middleContainer]}>
         <FlatList
           data={DATA}
           renderItem={renderItem}
           keyExtractor={item => item.id}
         />
       </View>
+      <Footer onClick={() => navigation.push('Todo')} text={"ADD"} />
     </View>
   );
 }
@@ -68,13 +67,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  mainContainer: {
-    flex: 1,
-    backgroundColor: "#ccc",
+  topContainer: {
+    flex: 2,
+    backgroundColor: "#eee",
   },
-  bottonContainer: {
-    flex: 4,
-    flexDirection: "row",
+  middleContainer: {
+    flex: 8,
+    backgroundColor: "#eee",
   },
   centerText: {
     justifyContent: 'center',
@@ -83,10 +82,6 @@ const styles = StyleSheet.create({
   bigText: {
     color: "black",
     fontSize: 30,
-  },
-  smallText: {
-    color: "black",
-    fontSize: 16,
   },
   title: {
     fontSize: 16,
