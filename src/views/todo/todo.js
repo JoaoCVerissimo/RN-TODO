@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import {
   Text,
   View,
-  StyleSheet,
   TextInput,
 } from 'react-native';
 import Footer from "../../components/footer";
+import styles from "./todoDetail.style";
 import { useDispatch } from 'react-redux';
 import { addTodo } from '../../redux/todoSlice';
+
 
 const Todo = ({ navigation }) => {
   const [title, setTitle] = useState("");
@@ -48,30 +49,5 @@ const Todo = ({ navigation }) => {
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#eee",
-  },
-  centerText: {
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  titleContainer: {
-    flex: 2,
-    top: 20,
-    marginHorizontal: 20,
-  },
-  descriptionContainer: {
-    flex: 8,
-    top: 20,
-    marginHorizontal: 20,
-  },
-  text: {
-    color: "grey",
-    fontWeight: "bold",
-  }
-});
 
 export default Todo;

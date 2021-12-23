@@ -1,13 +1,12 @@
 import React, { useLayoutEffect } from 'react';
 import {
-  Button,
   Text,
   View,
-  StyleSheet,
   FlatList,
   Pressable,
 } from 'react-native';
 import Footer from "../../components/footer";
+import styles from "./home.style";
 import { useDispatch, useSelector } from 'react-redux';
 import { addTodo } from '../redux/todoSlice';
 
@@ -62,37 +61,5 @@ function HomeScreen({ navigation }) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  topContainer: {
-    flex: 2,
-    backgroundColor: "#eee",
-  },
-  middleContainer: {
-    flex: 8,
-    backgroundColor: "#eee",
-  },
-  centerText: {
-    justifyContent: 'center',
-    alignItems: "center",
-  },
-  bigText: {
-    color: "black",
-    fontSize: 30,
-  },
-  title: {
-    fontSize: 16,
-  },
-  item: {
-    backgroundColor: '#fff',
-    padding: 10,
-    marginVertical: 8,
-    marginHorizontal: 16,
-    borderRadius: 20,
-  },
-});
 
 export default HomeScreen;
