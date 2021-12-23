@@ -14,13 +14,16 @@ const Todo = ({ navigation, route }) => {
   const [update, setUpdate] = useState(false);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-
   const id = route?.params?.id;
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (id) setUpdate(true);
+    if (id) {
+      setUpdate(true);
+      setTitle(route?.params?.title);
+      setDescription(route?.params?.description);
+    }
   }, [])
 
   const sendingTodo = () => {

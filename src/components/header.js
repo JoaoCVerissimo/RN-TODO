@@ -6,6 +6,8 @@ import {
 
 import styles from "../views/home/home.style";
 
+import { nanoid } from 'nanoid'
+
 const Header = () => {
   const week = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   const currentDate = new Date();
@@ -18,14 +20,14 @@ const Header = () => {
           return (
             <View key={index} style={[styles.topContainer, styles.centerText]}>
               {(monthDay + index) > 31 ?
-                <Text key={index + 100} style={styles.title}>{monthDay + index - 31}</Text>
+                <Text key={nanoid()} style={styles.title}>{monthDay + index - 31}</Text>
                 :
-                <Text key={index + 1000} style={styles.title}>{monthDay + index}</Text>}
+                <Text key={nanoid()} style={styles.title}>{monthDay + index}</Text>}
 
               {(currentDate.getDay() + index > 6) ?
-                <Text key={index + 10000} style={styles.title}>{week[currentDate.getDay() + index - 7]}</Text>
+                <Text key={nanoid()} style={styles.title}>{week[currentDate.getDay() + index - 7]}</Text>
                 :
-                <Text key={index + 5000} style={styles.title}>{week[currentDate.getDay() + index]}</Text>
+                <Text key={nanoid()} style={styles.title}>{week[currentDate.getDay() + index]}</Text>
               }
             </View>
           )
