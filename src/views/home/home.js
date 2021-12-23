@@ -20,6 +20,10 @@ function HomeScreen({ navigation }) {
 
   }, [navigation]);
 
+  const handleEditClick = (id) => {
+    navigation.push('Todo', { id: id })
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.topRowContainer}>
@@ -27,7 +31,7 @@ function HomeScreen({ navigation }) {
       </View>
       <CompletedItems />
       <View style={[styles.middleContainer]}>
-        <FlatListRedux />
+        <FlatListRedux handleEditClick={(id) => handleEditClick(id)} />
       </View>
       <Footer onClick={() => navigation.push('Todo')} text={"ADD"} />
     </View>

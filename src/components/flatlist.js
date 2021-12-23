@@ -10,10 +10,9 @@ import {
 import styles from "../views/home/home.style";
 
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleComplete, deleteTodo } from '../redux/todoSlice';
-import { getTodosAsync, toggleCompleteAsync } from '../redux/todoSlice';
+import { getTodosAsync, toggleCompleteAsync, deleteTodoAsync } from '../redux/todoSlice';
 
-const FlatListRedux = () => {
+const FlatListRedux = ({ handleEditClick }) => {
   const dispatch = useDispatch();
 
   const DATA = useSelector(state => state.todos); // Para ir buscar os dados à store com o nome "todos"
@@ -27,7 +26,7 @@ const FlatListRedux = () => {
   };
 
   const handleDeleteClick = (id) => {
-    dispatch(deleteTodo({ id }));
+    dispatch(deleteTodoAsync({ id }));
   };
 
   const Item = ({ id, title, description, completed }) => (
@@ -38,7 +37,10 @@ const FlatListRedux = () => {
       </View>
       <View style={{ position: "absolute", right: 0, top: "20%", marginRight: 10 }}>
         <Text>{completed ? "Completed" : "Uncompleted"}</Text>
-        <Button onPress={() => handleDeleteClick(id)} title="Delete" color="#841584"></Button>
+        <View style={{ flex: 1, flexDirection: "row" }}>
+          <Button onPress={() => handleEditClick(id)} title="Edit" color="blue"></Button>
+          <Button onPress={() => handleDeleteClick(id)} title="Delete" color="red"></Button>
+        </View>
       </View>
     </View>
   );

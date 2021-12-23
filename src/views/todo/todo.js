@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Text,
   View,
@@ -6,20 +6,29 @@ import {
 } from 'react-native';
 import Footer from "../../components/footer";
 import styles from "./todoDetail.style";
-import { useDispatch } from 'react-redux';
-import { addTodo } from '../../redux/todoSlice';
-import { addTodoAsync } from '../../redux/todoSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { addTodo, addTodoAsync, editTodoAsync } from '../../redux/todoSlice';
 
 
-const Todo = ({ navigation }) => {
+const Todo = ({ navigation, route }) => {
+  const [update, setUpdate] = useState(false);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
+  const id = route?.params?.id;
+
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    if (id) setUpdate(true);
+  }, [])
+
   const sendingTodo = () => {
-    if (title && description) {
+    if (title && description && update === false) {
       dispatch(addTodoAsync({ title, description }));
+      navigation.navigate('Home');
+    } else if (title && description && update === true) {
+      dispatch(editTodoAsync({ id, title, description }));
       navigation.navigate('Home');
     }
   }
@@ -46,7 +55,7 @@ const Todo = ({ navigation }) => {
           maxLength={300}
         />
       </View>
-      <Footer onClick={sendingTodo} text={"Add now"} />
+      <Footer onClick={sendingTodo} text={update ? "Update" : "Add now"} />
     </View>
   )
 }

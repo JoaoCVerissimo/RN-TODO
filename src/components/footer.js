@@ -34,14 +34,15 @@ const styles = StyleSheet.create({
   whiteText: {
     color: "white",
     fontWeight: "bold",
+    fontSize: 16,
   },
   centerText: {
     justifyContent: 'center',
     alignItems: "center",
   },
   roundButton: {
-    width: 70,
-    height: 70,
+    width: 80,
+    height: 80,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 10,

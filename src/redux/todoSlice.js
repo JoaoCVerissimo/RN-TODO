@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { nanoid } from 'nanoid'
 
 export const getTodosAsync = createAsyncThunk(
   'todos/getTodosAsync',
@@ -30,7 +31,7 @@ export const addTodoAsync = createAsyncThunk(
 );
 
 export const toggleCompleteAsync = createAsyncThunk(
-  'todos/completeTodoAsync',
+  'todos/toggleCompleteAsync',
   async (payload) => {
     const response = await fetch(`https://61c47227f1af4a0017d99555.mockapi.io/api/v1/todos/${payload.id}`, {
       method: 'PATCH',
@@ -47,13 +48,44 @@ export const toggleCompleteAsync = createAsyncThunk(
   }
 );
 
+export const deleteTodoAsync = createAsyncThunk(
+  'todos/deleteTodoAsync',
+  async (payload) => {
+    const response = await fetch(`https://61c47227f1af4a0017d99555.mockapi.io/api/v1/todos/${payload.id}`, {
+      method: 'DELETE',
+    });
+
+    if (response.ok) {
+      return { id: payload.id };
+    }
+  }
+);
+
+export const editTodoAsync = createAsyncThunk(
+  'todos/editTodoAsync',
+  async (payload) => {
+    const response = await fetch(`https://61c47227f1af4a0017d99555.mockapi.io/api/v1/todos/${payload.id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ title: payload.title, description: payload.description }),
+    });
+
+    if (response.ok) {
+      const todo = await response.json();
+      return { todo };
+    }
+  }
+);
+
 export const todoSlice = createSlice({
   name: 'todos',
   initialState: [],
   reducers: {
     addTodo: (state, action) => {
       const todo = {
-        id: Math.floor(Math.random() * 1000 * Math.random()),
+        id: nanoid(),
         title: action.payload.title,
         description: action.payload.description,
         completed: false,
@@ -77,7 +109,14 @@ export const todoSlice = createSlice({
     },
     [toggleCompleteAsync.fulfilled]: (state, action) => {
       const index = state.findIndex((todo) => todo.id === action.payload.todo.id); // vou buscar o index da payload retornada da api
-      state[index].completed = action.payload.todo.completed; // atualizo na minha stack o novo valor
+      state[index].completed = action.payload.todo.completed; // atualizo na stack o novo valor
+    },
+    [deleteTodoAsync.fulfilled]: (state, action) => {
+      return state.filter((todo) => todo.id !== action.payload.id);
+    },
+    [editTodoAsync.fulfilled]: (state, action) => {
+      const index = state.findIndex((todo) => todo.id === action.payload.todo.id);
+      state[index] = action.payload.todo;
     },
   },
 });
