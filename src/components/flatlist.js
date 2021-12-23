@@ -11,7 +11,7 @@ import styles from "../views/home/home.style";
 
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleComplete, deleteTodo } from '../redux/todoSlice';
-import { getTodosAsync } from '../redux/todoSlice';
+import { getTodosAsync, toggleCompleteAsync } from '../redux/todoSlice';
 
 const FlatListRedux = () => {
   const dispatch = useDispatch();
@@ -23,7 +23,7 @@ const FlatListRedux = () => {
   }, [dispatch])
 
   const handleCheckboxClick = (id, completed) => {
-    dispatch(toggleComplete({ id, completed: !completed }));
+    dispatch(toggleCompleteAsync({ id, completed: !completed }));
   };
 
   const handleDeleteClick = (id) => {

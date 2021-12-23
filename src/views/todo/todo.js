@@ -8,6 +8,7 @@ import Footer from "../../components/footer";
 import styles from "./todoDetail.style";
 import { useDispatch } from 'react-redux';
 import { addTodo } from '../../redux/todoSlice';
+import { addTodoAsync } from '../../redux/todoSlice';
 
 
 const Todo = ({ navigation }) => {
@@ -18,7 +19,7 @@ const Todo = ({ navigation }) => {
 
   const sendingTodo = () => {
     if (title && description) {
-      dispatch(addTodo({ title, description }));
+      dispatch(addTodoAsync({ title, description }));
       navigation.navigate('Home');
     }
   }
