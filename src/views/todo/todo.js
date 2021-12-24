@@ -58,7 +58,7 @@ const Todo = ({ navigation, route }) => {
           maxLength={300}
         />
       </View>
-      <Footer onClick={sendingTodo} text={update ? "Update" : "Add now"} />
+      <Footer onClick={sendingTodo} icon={update ? "save" : "plus"} />
     </View>
   )
 }

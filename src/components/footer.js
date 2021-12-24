@@ -5,8 +5,9 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
-const Footer = ({ onClick, text }) => {
+const Footer = ({ onClick, icon }) => {
   return (
     <View style={styles.container}>
       <View style={[styles.centerText]}>
@@ -18,7 +19,7 @@ const Footer = ({ onClick, text }) => {
         <TouchableOpacity
           onPress={onClick}
           style={styles.roundButton}>
-          <Text style={styles.whiteText}>{text}</Text>
+          <Text style={styles.whiteText}><Icon name={icon} size={30} color="#fff" solid /></Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -47,7 +48,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 10,
     borderRadius: 100,
-    backgroundColor: 'blue',
+    backgroundColor: '#2fafff',
     position: "absolute",
   },
   below: {

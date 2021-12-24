@@ -31,14 +31,14 @@ const FlatListRedux = ({ handleEditClick }) => {
 
   const Item = ({ id, title, description, completed }) => (
     <View style={[styles.item, styles.rowContainer]}>
-      <View style={{ width: "70%" }}>
+      <View style={{ width: "60%" }}>
         <Text style={styles.title}>{title}</Text>
-        <Text style={styles.title}>{description}</Text>
+        <Text style={styles.description}>{description}</Text>
       </View>
       <View style={{ position: "absolute", right: 0, top: "20%", marginRight: 10 }}>
         <Text>{completed ? "Completed" : "Uncompleted"}</Text>
         <View style={{ flex: 1, flexDirection: "row" }}>
-          <Button onPress={() => handleEditClick(id, title, description)} title="Edit" color="blue"></Button>
+          <Button onPress={() => handleEditClick(id, title, description)} title="Edit" color="#2fafff"></Button>
           <Button onPress={() => handleDeleteClick(id)} title="Delete" color="red"></Button>
         </View>
       </View>
