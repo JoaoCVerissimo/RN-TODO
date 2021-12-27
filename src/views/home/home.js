@@ -1,9 +1,9 @@
 import React, { useLayoutEffect } from 'react';
 import { View, Text } from 'react-native';
-import Footer from "../../components/footer";
-import FlatListRedux from '../../components/flatlist';
-import Header from '../../components/header';
-import CompletedItems from '../../components/completedItems';
+import Footer from "../../components/footer/footer";
+import FlatListRedux from '../../components/flatlist/flatlist';
+import Header from '../../components/header/header';
+import CompletedItems from '../../components/completedItems/completedItems';
 
 import styles from "./home.style";
 
@@ -28,10 +28,13 @@ function HomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.topRowContainer}>
+        {/* Aqui executa a função que lhe tenho de passar por parametro para filtrar os resultados */}
         <Header week={week} />
       </View>
+      {/* Enviar o dia clicado que vai ser recebido por params do Header após dar push para aqui (Home)*/}
       <CompletedItems />
       <View style={[styles.middleContainer]}>
+        {/* Enviar o dia clicado */}
         <FlatListRedux handleEditClick={(id, title, description) => handleEditClick(id, title, description)} />
       </View>
       <Footer onClick={() => navigation.push('Todo')} icon="plus" />

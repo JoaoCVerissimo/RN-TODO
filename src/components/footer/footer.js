@@ -2,10 +2,12 @@ import React from "react";
 import {
   Text,
   View,
-  StyleSheet,
   TouchableOpacity,
 } from 'react-native';
+
 import Icon from 'react-native-vector-icons/FontAwesome5';
+
+import styles from "./style";
 
 const Footer = ({ onClick, icon }) => {
   return (
@@ -25,40 +27,5 @@ const Footer = ({ onClick, icon }) => {
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#ddd",
-    opacity: 1,
-  },
-  whiteText: {
-    color: "white",
-    fontWeight: "bold",
-    fontSize: 16,
-  },
-  centerText: {
-    justifyContent: 'center',
-    alignItems: "center",
-  },
-  roundButton: {
-    width: 80,
-    height: 80,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 10,
-    borderRadius: 100,
-    backgroundColor: '#2fafff',
-    position: "absolute",
-  },
-  below: {
-    width: 100,
-    height: 100,
-    padding: 10,
-    borderRadius: 100,
-    backgroundColor: '#eee',
-    position: "absolute",
-  }
-});
 
 export default Footer;

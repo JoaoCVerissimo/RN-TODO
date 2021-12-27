@@ -4,8 +4,8 @@ import {
   View,
   TextInput,
 } from 'react-native';
-import Footer from "../../components/footer";
-import styles from "./todoDetail.style";
+import Footer from "../../components/footer/footer";
+import styles from "./todoDetails.style";
 import { useDispatch, useSelector } from 'react-redux';
 import { addTodo, addTodoAsync, editTodoAsync } from '../../redux/todoSlice';
 

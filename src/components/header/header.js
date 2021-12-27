@@ -5,7 +5,7 @@ import {
   Pressable,
 } from 'react-native';
 
-import styles from "../views/home/home.style";
+import styles from "./style";
 
 import { nanoid } from 'nanoid'
 
@@ -14,9 +14,10 @@ const Header = ({ week }) => {
   let monthDay = currentDate.getDate();
 
   const handleSearchClick = (dia) => {
-    // filtrar a pesquisa abaixo
-    // para fazer isto, também tenho de filtrar logo ao inicio para o dia de hoje
     console.log("hoje é dia " + dia)
+    // mudar o style dos botões selecionados/não selecionados
+    // executar uma função que vai ter de ser adicionada como prop para aqui que vai filtrar os dados e ser executada aqui
+    // dar navigation.navigate("home", com o dia aqui como parametro);
   }
 
   return (
