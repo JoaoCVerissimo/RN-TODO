@@ -14,14 +14,14 @@ import { getTodosAsync, toggleCompleteAsync, deleteTodoAsync } from '../../redux
 
 import { CheckBox } from 'react-native-elements';
 
-const FlatListRedux = ({ handleEditClick, date }) => { // Recebo aqui o dia em questão
+const FlatListRedux = ({ handleEditClick, date }) => {
   const dispatch = useDispatch();
 
-  const DATA = useSelector(state => state.todos.filter((todo) => todo.date === date)); // Aqui tinha de mudar para ir buscar apenas dados filtrados de um dia enviado pelo screen home
+  const DATA = useSelector(state => state.todos.filter((todo) => todo.date === date));
 
   useEffect(() => {
-    dispatch(getTodosAsync()); // Aqui também só vou buscar os que correspondem ao determinado dia
-    // apagar os que não são do dia de hoje
+    dispatch(getTodosAsync()); // Vou buscar todos à API e depois filtro no selector os que quero
+    // apagar os que não são anteriores ao dia de hoje. talvez?
   }, [dispatch])
 
   const handleCheckboxClick = (id, completed) => {
