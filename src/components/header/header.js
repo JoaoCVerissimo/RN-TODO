@@ -9,16 +9,9 @@ import styles from "./style";
 
 import { nanoid } from 'nanoid'
 
-const Header = ({ week }) => {
+const Header = ({ handleSearchClick, week }) => {
   const currentDate = new Date();
   let monthDay = currentDate.getDate();
-
-  const handleSearchClick = (dia) => {
-    console.log("hoje é dia " + dia)
-    // mudar o style dos botões selecionados/não selecionados
-    // executar uma função que vai ter de ser adicionada como prop para aqui que vai filtrar os dados e ser executada aqui
-    // dar navigation.navigate("home", com o dia aqui como parametro);
-  }
 
   return (
     <>

@@ -14,13 +14,14 @@ import { getTodosAsync, toggleCompleteAsync, deleteTodoAsync } from '../../redux
 
 import { CheckBox } from 'react-native-elements';
 
-const FlatListRedux = ({ handleEditClick }) => { // Recebo aqui o dia em questão
+const FlatListRedux = ({ handleEditClick, date }) => { // Recebo aqui o dia em questão
   const dispatch = useDispatch();
 
-  const DATA = useSelector(state => state.todos); // Aqui tinha de mudar para ir buscar apenas dados filtrados de um dia enviado pelo screen home
+  const DATA = useSelector(state => state.todos.filter((todo) => todo.date === date)); // Aqui tinha de mudar para ir buscar apenas dados filtrados de um dia enviado pelo screen home
 
   useEffect(() => {
     dispatch(getTodosAsync()); // Aqui também só vou buscar os que correspondem ao determinado dia
+    // apagar os que não são do dia de hoje
   }, [dispatch])
 
   const handleCheckboxClick = (id, completed) => {
@@ -31,7 +32,7 @@ const FlatListRedux = ({ handleEditClick }) => { // Recebo aqui o dia em questã
     dispatch(deleteTodoAsync({ id }));
   };
 
-  const Item = ({ id, title, description, completed }) => (
+  const Item = ({ id, title, description, completed, date }) => (
     <View style={[styles.item, styles.rowContainer]}>
       <View style={{ width: "60%" }}>
         <Text style={completed ? [styles.title, styles.completed] : [styles.title]}>{title}</Text>
@@ -39,7 +40,7 @@ const FlatListRedux = ({ handleEditClick }) => { // Recebo aqui o dia em questã
       </View>
       <View style={{ right: 0, marginRight: 10 }}>
         <View style={{ flex: 1, flexDirection: "row" }}>
-          <Button onPress={() => handleEditClick(id, title, description)} title="Edit" color="#2fafff"></Button>
+          <Button onPress={() => handleEditClick(id, title, description, date)} title="Edit" color="#2fafff"></Button>
           <Button onPress={() => handleDeleteClick(id)} title="Delete" color="red"></Button>
         </View>
         <CheckBox
@@ -51,9 +52,9 @@ const FlatListRedux = ({ handleEditClick }) => { // Recebo aqui o dia em questã
     </View>
   );
 
-  const renderItem = ({ item: { id, title, description, completed } }) => (
+  const renderItem = ({ item: { id, title, description, completed, date } }) => (
     <Pressable >
-      <Item id={id} title={title} description={description} completed={completed} />
+      <Item id={id} title={title} description={description} completed={completed} date={date} />
     </Pressable>
   );
 

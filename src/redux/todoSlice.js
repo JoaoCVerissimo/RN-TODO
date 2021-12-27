@@ -20,7 +20,7 @@ export const addTodoAsync = createAsyncThunk(
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ title: payload.title, description: payload.description }),
+      body: JSON.stringify({ title: payload.title, description: payload.description, date: payload.date }),
     });
 
     if (response.ok) {
@@ -89,6 +89,7 @@ export const todoSlice = createSlice({
         title: action.payload.title,
         description: action.payload.description,
         completed: false,
+        date: action.payload.date,
       };
       state.push(todo);
     },

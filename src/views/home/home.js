@@ -11,6 +11,8 @@ const month = ["January", "February", "March", "April", "May", "June", "July", "
 const week = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 function HomeScreen({ navigation }) {
+  const monthDay = new Date().getDate();
+
   useLayoutEffect(() => {
     let monthName = month[new Date().getMonth()];
 
@@ -27,23 +29,31 @@ function HomeScreen({ navigation }) {
 
   }, [navigation]);
 
-  const handleEditClick = (id, title, description) => {
-    navigation.push('Todo', { id: id, title: title, description: description })
+  const handleEditClick = (id, title, description, date) => {
+    navigation.push('Todo', { id: id, title: title, description: description, date: date })
   };
+
+  //Função que vai ser executada apos clicar num dos dias do calendário
+  const handleSearchClick = (date) => {
+    console.log("hoje é dia " + date)
+    // mudar o style dos botões selecionados/não selecionados. talvez?
+    // executar uma função que vai filtrar os dados e ser executada aqui
+  }
 
   return (
     <View style={styles.container}>
       <View style={styles.topRowContainer}>
-        {/* Aqui executa a função que lhe tenho de passar por parametro para filtrar os resultados */}
-        <Header week={week} />
+        {/* Aqui executa a função que lhe tenho de passar por parametro para filtrar os resultados de acordo com o dia */}
+        <Header handleSearchClick={(date) => handleSearchClick(date)} week={week} />
       </View>
-      {/* Enviar o dia clicado que vai ser recebido por params do Header após dar push para aqui (Home)*/}
-      <CompletedItems />
+      {/* Enviar o dia clicado para filtrar e apenas contar os do dia selecionado*/}
+      <CompletedItems date={monthDay} />
       <View style={[styles.middleContainer]}>
-        {/* Enviar o dia clicado */}
-        <FlatListRedux handleEditClick={(id, title, description) => handleEditClick(id, title, description)} />
+        {/* Enviar o dia clicado para filtrar os resultados */}
+        <FlatListRedux handleEditClick={(id, title, description, date) => handleEditClick(id, title, description, date)} date={monthDay} />
       </View>
-      <Footer onClick={() => navigation.push('Todo')} icon="plus" />
+      {/* Aqui mando o dia tambem para ao adicionar enviar o dia junto ao adicionar tasks */}
+      <Footer onClick={() => navigation.push('Todo', { date: monthDay })} icon="plus" />
     </View>
   );
 }

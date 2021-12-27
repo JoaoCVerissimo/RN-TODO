@@ -12,23 +12,21 @@ import { addTodo, addTodoAsync, editTodoAsync } from '../../redux/todoSlice';
 
 const Todo = ({ navigation, route }) => {
   const [update, setUpdate] = useState(false);
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const [title, setTitle] = useState(route?.params?.title);
+  const [description, setDescription] = useState(route?.params?.description);
+  const [date, setDate] = useState(route?.params?.date);
   const id = route?.params?.id;
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (id) {
-      setUpdate(true);
-      setTitle(route?.params?.title);
-      setDescription(route?.params?.description);
-    }
+    if (id) setUpdate(true);
   }, [])
 
   const sendingTodo = () => {
     if (title && description && update === false) {
-      dispatch(addTodoAsync({ title, description }));
+      dispatch(addTodoAsync({ title, description, date }));
+      console.log(date);
       navigation.navigate('Home');
     } else if (title && description && update === true) {
       dispatch(editTodoAsync({ id, title, description }));
