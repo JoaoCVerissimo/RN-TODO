@@ -12,13 +12,14 @@ import styles from "./style";
 import { useDispatch, useSelector } from 'react-redux';
 import { getTodosAsync, toggleCompleteAsync, deleteTodoAsync } from '../../redux/todoSlice';
 
+import Icon from 'react-native-vector-icons/FontAwesome5';
 import { CheckBox } from 'react-native-elements';
 
 const FlatListRedux = ({ handleEditClick, date }) => {
   const dispatch = useDispatch();
 
   const today = new Date().getDate();
-
+  const TODOs = useSelector(state => state.todos);
   const DATA = useSelector(state => state.todos.filter((todo) => todo.date === date));
 
   useEffect(() => {
@@ -27,7 +28,6 @@ const FlatListRedux = ({ handleEditClick, date }) => {
   }, [dispatch])
 
   const clearOutdated = () => {
-    const TODOs = useSelector(state => state.todos);
     TODOs.map((todo, index) => {
       if (today === 1 && todo.date >= 24 && todo.date <= 31) handleDeleteClick(todo.id);
       if (today === 8 && todo.date >= 1 && todo.date <= 7) handleDeleteClick(todo.id);
@@ -51,10 +51,16 @@ const FlatListRedux = ({ handleEditClick, date }) => {
         <Text style={completed ? [styles.description, styles.completed] : [styles.description]}>{description}</Text>
       </View>
       <View style={{ right: 0, marginRight: 10 }}>
-        <View style={{ flex: 1, flexDirection: "row" }}>
-          <Button onPress={() => handleEditClick(id, title, description, date)} title="Edit" color="#2fafff"></Button>
-          <Button onPress={() => handleDeleteClick(id)} title="Delete" color="red"></Button>
-        </View>
+        {
+          completed ?
+            null :
+            <View style={{ flex: 1, flexDirection: "row" }}>
+              <Button onPress={() => handleEditClick(id, title, description, date)} title="Edit" color="#2fafff"></Button>
+              <Icon name={"pen"} size={10} color="#111" />
+              <Button onPress={() => handleDeleteClick(id)} title="Delete" color="red"></Button>
+              <Icon name={"trash"} size={10} color="#111" />
+            </View>
+        }
         <CheckBox
           title="Done"
           checked={completed}
