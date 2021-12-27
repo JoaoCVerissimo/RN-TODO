@@ -21,18 +21,20 @@ const FlatListRedux = ({ handleEditClick, date }) => {
 
   const DATA = useSelector(state => state.todos.filter((todo) => todo.date === date));
 
-  const TODOs = useSelector(state => state.todos); // vou buscar todos os TODOs
-
   useEffect(() => {
-    dispatch(getTodosAsync()); // Vou buscar todos à API e depois filtro no selector os que quero
-    // Apago a determinados dias os dados da semana anterior.
+    dispatch(getTodosAsync()); // Vou buscar todos à API e depois é que filtro no selector os que quero
+    clearOutdated();
+  }, [dispatch])
+
+  const clearOutdated = () => {
+    const TODOs = useSelector(state => state.todos);
     TODOs.map((todo, index) => {
       if (today === 1 && todo.date >= 24 && todo.date <= 31) handleDeleteClick(todo.id);
       if (today === 8 && todo.date >= 1 && todo.date <= 7) handleDeleteClick(todo.id);
       if (today === 15 && todo.date >= 8 && todo.date <= 14) handleDeleteClick(todo.id);
       if (today === 24 && todo.date >= 15 && todo.date <= 23) handleDeleteClick(todo.id);
     })
-  }, [dispatch])
+  }
 
   const handleCheckboxClick = (id, completed) => {
     dispatch(toggleCompleteAsync({ id, completed: !completed }));
