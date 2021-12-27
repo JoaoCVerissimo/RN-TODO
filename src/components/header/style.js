@@ -21,6 +21,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#05b5ff",
     borderWidth: 1,
     borderStyle: 1,
+  },
+  selected: {
+    color: "white",
+    fontWeight: "bold",
+    fontSize: 16,
   }
 })
 

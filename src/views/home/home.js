@@ -34,17 +34,13 @@ function HomeScreen({ navigation }) {
     navigation.push('Todo', { id: id, title: title, description: description, date: date })
   };
 
-  //Função que vai ser executada apos clicar num dos dias do calendário
-  const handleSearchClick = (date) => {
-    console.log("hoje é dia " + date)
-    setSelectedDay(date);
-    // mudar o style dos botões selecionados/não selecionados. talvez?
-  }
+  // Função que vai ser executada apos clicar num dos dias do calendário
+  const handleSearchClick = (date) => setSelectedDay(date);
 
   return (
     <View style={styles.container}>
       <View style={styles.topRowContainer}>
-        <Header handleSearchClick={(date) => handleSearchClick(date)} week={week} />
+        <Header handleSearchClick={(date) => handleSearchClick(date)} week={week} selectedDay={selectedDay} />
       </View>
       <CompletedItems date={selectedDay} />
       <View style={[styles.middleContainer]}>

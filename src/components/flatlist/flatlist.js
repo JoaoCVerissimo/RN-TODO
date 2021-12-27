@@ -17,11 +17,21 @@ import { CheckBox } from 'react-native-elements';
 const FlatListRedux = ({ handleEditClick, date }) => {
   const dispatch = useDispatch();
 
+  const today = new Date().getDate();
+
   const DATA = useSelector(state => state.todos.filter((todo) => todo.date === date));
+
+  const TODOs = useSelector(state => state.todos); // vou buscar todos os TODOs
 
   useEffect(() => {
     dispatch(getTodosAsync()); // Vou buscar todos à API e depois filtro no selector os que quero
-    // apagar os que não são anteriores ao dia de hoje. talvez?
+    // Apago a determinados dias os dados da semana anterior.
+    TODOs.map((todo, index) => {
+      if (today === 1 && todo.date >= 24 && todo.date <= 31) handleDeleteClick(todo.id);
+      if (today === 8 && todo.date >= 1 && todo.date <= 7) handleDeleteClick(todo.id);
+      if (today === 15 && todo.date >= 8 && todo.date <= 14) handleDeleteClick(todo.id);
+      if (today === 24 && todo.date >= 15 && todo.date <= 23) handleDeleteClick(todo.id);
+    })
   }, [dispatch])
 
   const handleCheckboxClick = (id, completed) => {

@@ -26,7 +26,6 @@ const Todo = ({ navigation, route }) => {
   const sendingTodo = () => {
     if (title && description && update === false) {
       dispatch(addTodoAsync({ title, description, date }));
-      console.log(date);
       navigation.navigate('Home');
     } else if (title && description && update === true) {
       dispatch(editTodoAsync({ id, title, description }));
