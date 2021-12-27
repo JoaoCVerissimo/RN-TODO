@@ -15,6 +15,8 @@ function LogInPage({ navigation, route }) {
     // console.log(email, password, password.length);
     // (validateEmail(email) && password.length > 8) ?
     //   navigation.navigate('Home')
+    //   setEmail("");
+    //   setPassword("");
     //   :
     //   navigation.navigate('Auth');
     navigation.navigate('Home');
@@ -28,7 +30,7 @@ function LogInPage({ navigation, route }) {
         <View style={[styles.centerText, styles.email]}>
           <Text style={styles.text}>Email:</Text>
           <TextInput
-            style={{ height: 40, borderColor: '#ccc', borderWidth: 1 }}
+            style={{ height: 40, borderColor: '#ccc', borderWidth: 1, borderRadius: 10, minWidth: 130 }}
             placeholder="Email Address"
             onChangeText={setEmail}
             value={email}
@@ -38,18 +40,18 @@ function LogInPage({ navigation, route }) {
         <View style={[styles.centerText, styles.password]}>
           <Text style={styles.text}>Password:</Text>
           <TextInput
-            style={{ height: 40, borderColor: '#ccc', borderWidth: 1 }}
+            style={{ height: 40, borderColor: '#ccc', borderWidth: 1, borderRadius: 10, minWidth: 130 }}
             placeholder="Password"
             onChangeText={setPassword}
             value={password}
             maxLength={20}
+            secureTextEntry={true}
           />
         </View>
         <View style={styles.backgroundColor}>
           <Button
             title="Log In"
             onPress={validate}
-            color="black"
           />
         </View>
       </View>

@@ -17,15 +17,16 @@ const styles = StyleSheet.create({
     fontSize: 30,
   },
   backgroundColor: {
-    backgroundColor: "#bbb",
+    backgroundColor: "#ccc",
     borderRadius: 30,
-    width: 100,
+    width: 120,
+    fontWeight: "bold",
   },
   email: {
     marginBottom: 40,
   },
   password: {
-    marginBottom: 120,
+    marginBottom: 60,
   }
 });
 

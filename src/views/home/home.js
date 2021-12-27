@@ -1,5 +1,5 @@
 import React, { useLayoutEffect } from 'react';
-import { View, Text } from 'react-native';
+import { View, Button } from 'react-native';
 import Footer from "../../components/footer/footer";
 import FlatListRedux from '../../components/flatlist/flatlist';
 import Header from '../../components/header/header';
@@ -17,6 +17,12 @@ function HomeScreen({ navigation }) {
     navigation.setOptions({
       title: `${monthName}`,
       headerLeft: () => (<></>),
+      headerRight: () => (
+        <Button
+          onPress={() => navigation.navigate("Auth")}
+          title="Logout"
+          color="red"
+        />)
     });
 
   }, [navigation]);
